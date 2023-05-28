@@ -42,4 +42,29 @@ public class BlogController {
         model.addAttribute("blog", new Blog());
         return "/blog/create";
     }
+
+    @GetMapping("/edit")
+    public String editForm(Model model, @RequestParam ("id") Long id) {
+        model.addAttribute("blog", blogService.findById(id));
+        return "/blog/edit";
+    }
+
+    @PostMapping("/update")
+    public String updateBlog(@ModelAttribute ("blog") Blog blog, Model model) {
+        blogService.save(blog);
+        model.addAttribute("message", "Update Success!");
+        return "/blog/edit";
+    }
+
+    @GetMapping("/delete")
+    public String deleteForm(@RequestParam("id") Long id, Model model) {
+        model.addAttribute("blog", blogService.findById(id).get());
+        return "/blog/delete";
+    }
+
+    @PostMapping("/delete")
+    public String deleteBlog(@ModelAttribute("blog") Blog blog) {
+        blogService.remove(blog.getBlogId());
+        return "redirect:/";
+    }
 }

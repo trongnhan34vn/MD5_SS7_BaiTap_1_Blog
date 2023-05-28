@@ -23,8 +23,8 @@
       <td th:text="${blog.getCategory().categoryName}"></td>
       <td th:text="${blog.getTitle()}"></td>
       <td th:text="${blog.getContent()}"></td>
-      <td><button><a href="">Edit</a></button></td>
-      <td><a href="">Delete</a></td>
+      <td><button><a th:href="@{/blog/edit(id=${blog.blogId})}">Edit</a></button></td>
+      <td><a th:href="@{/blog/delete(id=${blog.blogId})}">Delete</a></td>
     </tr>
   </th:block>
 </table>
